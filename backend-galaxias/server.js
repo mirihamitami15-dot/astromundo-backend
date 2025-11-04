@@ -10,6 +10,13 @@ const app = express();
 
 app.use(express.json());
 
+// 4. Importar Rutas
+const juegosRouter = require('./routes/juegos');
+
+// 5. Definir la URL base para las rutas de juegos (Endpoint principal)
+app.use('/api/juegos', juegosRouter); 
+
+
 // --- CONEXIÓN A MONGOOSE ---
 const MONGODB_URI = process.env.MONGO_URI; 
 
@@ -31,4 +38,11 @@ app.get('/', (req, res) => {
   res.send('🌌 Servidor GameTracker iniciado en la galaxia. 🚀');
 });
 
-// ... aquí irán las rutas del proyecto ...
+
+
+
+
+
+
+
+
