@@ -6,11 +6,13 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose'); // Importar Mongoose
+const logrosRouter = require('./routes/logros');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/logros', logrosRouter);
 
 
 // 4. Importar Rutas
