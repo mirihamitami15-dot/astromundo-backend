@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Juego = require('../models/Juego'); // Importar el Modelo
 
-// GET /api/juegos - Buscar todos los juegos [cite: 53]
+// GET /api/juegos - Buscar todos los juegos 
 router.get('/', async (req, res) => {
   try {
     // Buscar todos los documentos de juegos en la DB
@@ -14,7 +14,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST /api/juegos - Agregar un nuevo juego [cite: 53]
+// NUEVA RUTA: GET /api/juegos/:id - Buscar un juego por su ID
+router.get('/:id', async (req, res) => {
+  try {
+    // Intenta buscar un juego por el ID proporcionado en la URL
+    const juego = await Juego.findById(req.params.id);
+
+    if (!juego) {
+      // Si no se encuentra, devuelve 404
+      return res.status(404).json({ message: 'Juego no encontrado.' });
+    }
+    // Si se encuentra, lo devuelve
+    res.status(200).json(juego);
+  } catch (error) {
+    // Maneja errores de formato del ID o de conexión a DB
+    res.status(500).json({ message: 'Error al buscar juego: ' + error.message });
+  }
+});
+
+// POST /api/juegos - Agregar un nuevo juego 
 router.post('/', async (req, res) => {
   try {
     const nuevoJuego = new Juego(req.body);
@@ -28,7 +46,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/juegos/:id - Editar un juego [cite: 53]
+// PUT /api/juegos/:id - Editar un juego 
 router.put('/:id', async (req, res) => {
   try {
     const juegoEditado = await Juego.findByIdAndUpdate(
@@ -46,7 +64,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/juegos/:id - Eliminar un juego [cite: 53]
+// DELETE /api/juegos/:id - Eliminar un juego 
 router.delete('/:id', async (req, res) => {
   try {
     const resultado = await Juego.findByIdAndDelete(req.params.id);

@@ -4,19 +4,22 @@
 require('dotenv').config(); 
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose'); // Importar Mongoose
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
 
 // 4. Importar Rutas
 const juegosRouter = require('./routes/juegos');
-const reseñasRouter = require('./routes/reseñas'); 
+const reviewsRouter = require('./routes/reviews'); 
 
 // 5. Definir la URL base para las rutas
 app.use('/api/juegos', juegosRouter); 
-app.use('/api/reseñas', reseñasRouter); 
+app.use('/api/reviews', reviewsRouter); 
 
 
 // --- CONEXIÓN A MONGOOSE ---
