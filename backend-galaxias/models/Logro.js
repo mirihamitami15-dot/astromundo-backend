@@ -19,6 +19,13 @@ const logroSchema = new mongoose.Schema({
   secreto: { // Para simular logros ocultos como en Steam
     type: Boolean,
     default: false
+  },
+  
+  porcentajeJugadores: { 
+    type: Number,
+    required: true, // Hacemos que sea obligatorio para insertarlo
+    min: 0,
+    max: 100
   }
 });
 

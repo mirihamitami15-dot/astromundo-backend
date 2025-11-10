@@ -1,7 +1,5 @@
 // models/Juego.js (Modelo GameTracker)
 const mongoose = require('mongoose');
-
-// Definición de la estructura de un Juego (como un mapa estelar)
 const juegoSchema = new mongoose.Schema({
   titulo: {
     type: String,
